@@ -19,6 +19,36 @@ func (l *SinglyLinkedList) Add(data int) *SinglyLinkedList {
 	return l
 }
 
+// Length returns the length of the list.
+func (l *SinglyLinkedList) Length() int {
+	if l.head == nil {
+		return 0
+	}
+	length := 1
+	current := l.head
+	for {
+		if current.next == nil {
+			return length
+		}
+		length++
+		current = current.next
+	}
+}
+
+// At returns the node at the given index.
+func (l *SinglyLinkedList) At(i int) *SinglyLinkedListNode {
+	// TODO: Return an error if i > len - 1.
+	j := 0
+	current := l.head
+	for {
+		if i == j {
+			return current
+		}
+		j++
+		current = current.next
+	}
+}
+
 // Tail returns the last element in the linked list.
 func (l *SinglyLinkedList) Tail() *SinglyLinkedListNode {
 	if l.head == nil {
