@@ -29,7 +29,7 @@ func (q *TwoStackQueue) Peek() (int, error) {
 	if q.IsEmpty() {
 		return 0, fmt.Errorf("can't peek into an empty queue")
 	}
-	err := q.transfer(q.mainStack, q.tempStack)
+	err := transfer(q.mainStack, q.tempStack)
 	if err != nil {
 		return 0, err
 	}
@@ -37,7 +37,7 @@ func (q *TwoStackQueue) Peek() (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	err = q.transfer(q.tempStack, q.mainStack)
+	err = transfer(q.tempStack, q.mainStack)
 	if err != nil {
 		return 0, err
 	}
@@ -48,7 +48,7 @@ func (q *TwoStackQueue) Remove() (int, error) {
 	if q.IsEmpty() {
 		return 0, fmt.Errorf("can't remove from an empty queue")
 	}
-	err := q.transfer(q.mainStack, q.tempStack)
+	err := transfer(q.mainStack, q.tempStack)
 	if err != nil {
 		return 0, err
 	}
@@ -56,7 +56,7 @@ func (q *TwoStackQueue) Remove() (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	err = q.transfer(q.tempStack, q.mainStack)
+	err = transfer(q.tempStack, q.mainStack)
 	if err != nil {
 		return 0, err
 	}
@@ -64,7 +64,7 @@ func (q *TwoStackQueue) Remove() (int, error) {
 }
 
 // transfer moves the items from stack a to stack b.
-func (q *TwoStackQueue) transfer(a, b *Stack) error {
+func transfer(a, b *Stack) error {
 	for !a.IsEmpty() {
 		item, err := a.Pop()
 		if err != nil {
