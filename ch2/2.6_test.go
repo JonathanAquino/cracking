@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// isPalindrome checks if the linked list represents a palindrome.
 func isPalindrome(l *SinglyLinkedList) bool {
 	len := l.Length()
 	// Integer division rounds down.

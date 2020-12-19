@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TwoStackQueue is a queue implemented using two stacks
+// TwoStackQueue is a queue implemented using two stacks.
 type TwoStackQueue struct {
 	mainStack *Stack
 	tempStack *Stack

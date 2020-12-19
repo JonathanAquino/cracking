@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// A Stack with an O(1) Min operation
+// StackWithMin is a Stack with an O(1) Min operation
 type StackWithMin struct {
 	mainStack *Stack
 	minStack  *Stack

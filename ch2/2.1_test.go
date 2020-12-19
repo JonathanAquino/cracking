@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// removeDuplicates removes duplicates from an unsorted linked list.
 func removeDuplicates(l *SinglyLinkedList) {
 	slow := l.head
 	for slow != nil {

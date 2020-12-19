@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// isUnique returns whether the string has all unique characters.
 func isUnique(s string) bool {
 	seen := map[rune]bool{}
 	for _, c := range s {
@@ -17,6 +18,7 @@ func isUnique(s string) bool {
 	return true
 }
 
+// isUniqueB does the same as isUnique but without using additional data structures.
 func isUniqueB(s string) bool {
 	for i, c := range s {
 		for j, other := range s {

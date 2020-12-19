@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// partition partitions a linked list into values < threshold and values >= threshold.
 func partition(l *SinglyLinkedList, threshold int) *SinglyLinkedList {
 	// Less than list
 	ltList := SinglyLinkedList{}

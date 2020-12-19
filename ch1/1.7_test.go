@@ -3,10 +3,11 @@ package ch1
 import (
 	"math"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
+// rotate rotates an nxn matrix by 90 degrees in place.
 func rotate(matrix [][]int) {
 	if len(matrix) == 0 {
 		return

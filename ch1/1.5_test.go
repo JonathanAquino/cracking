@@ -6,7 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// Assume a and b are ASCII
+// isOneAway checks if a and b are 0 or 1 edit away (edit being insertion, deletion, or
+// replacement of a character). Assumes a and b are ASCII.
 func isOneAway(a, b string) bool {
 	aLen := len(a)
 	bLen := len(b)

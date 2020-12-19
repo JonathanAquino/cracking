@@ -8,6 +8,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// compress does basic string compression using counts of repeated characters.
+// For example, aaaabbb becomes a4b3. If the compressed string is not smaller than
+// the original, the original string is returned. Assumes s contains uppercase and
+// lowercase letters only.
 func compress(s string) string {
 	compressed := ""
 	currentLetter := ""

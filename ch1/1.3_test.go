@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// urlify replaces all spaces with %20. Assumes that the string has enough space
+// to hold the additional characters.
 func urlify(b *[]byte, length int) {
 	numSpaces := 0
 	for i := 0; i < length; i++ {

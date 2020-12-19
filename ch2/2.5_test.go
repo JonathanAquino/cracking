@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// sumLists adds two numbers represented by a linked list. For example, 24 + 8 = 32
+// is represented by (4 -> 2) + (8) = (2 -> 3).
 func sumLists(a *SinglyLinkedList, b *SinglyLinkedList) *SinglyLinkedList {
 	sumList := SinglyLinkedList{}
 	aCurrent := a.head
@@ -28,6 +30,12 @@ func sumLists(a *SinglyLinkedList, b *SinglyLinkedList) *SinglyLinkedList {
 		sumList.Add(1)
 	}
 	return &sumList
+}
+
+// sumListsReverse does the same as sumLists but in a more natural (reversed) order.
+// For example, 24 + 8 = 32 is represented by (2 -> 4) + (8) = (3 -> 2).
+func sumListsReverse(a *SinglyLinkedList, b *SinglyLinkedList) *SinglyLinkedList {
+	return reverseList(sumLists(reverseList(a), reverseList(b)))
 }
 
 // reverseList returns a new linked list with the elements reversed.

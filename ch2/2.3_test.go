@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// removeNode removes a middle (not first or last) node from a singly linked list,
+// given only that node.
 func removeNode(node *SinglyLinkedListNode) {
 	current := node
 	for {

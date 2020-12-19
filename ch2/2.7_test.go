@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// intersects returns whether any nodes in the two lists have the same reference.
 func intersects(a *SinglyLinkedList, b *SinglyLinkedList) bool {
 	aCurrent := a.head
 	for aCurrent != nil {

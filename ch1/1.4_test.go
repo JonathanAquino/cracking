@@ -7,6 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// isPalindromePermutation checks if the string is a permutation of a palindrome.
 func isPalindromePermutation(s string) bool {
 	s = strings.ToLower(s)
 	charToCount := map[string]int{}

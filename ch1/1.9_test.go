@@ -7,15 +7,16 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func isSubstring(needle string, haystack string) bool {
-	return strings.Contains(haystack, needle)
-}
-
+// isRotation checks if a is a rotation of b using a single call to isSubstring.
 func isRotation(a string, b string) bool {
 	if len(a) != len(b) {
 		return false
 	}
 	return isSubstring(a, b+b)
+}
+
+func isSubstring(needle string, haystack string) bool {
+	return strings.Contains(haystack, needle)
 }
 
 func TestIsSubstring(t *testing.T) {

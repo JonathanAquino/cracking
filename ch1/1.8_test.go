@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// zeroMatrix looks for 0s and zeroes out the entire row and column wherever
+// they are found.
 func zeroMatrix(matrix [][]int) {
 	if len(matrix) == 0 {
 		return

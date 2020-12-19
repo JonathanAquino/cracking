@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// kthToLast finds the kth to last element of a linked list.
 func kthToLast(l *SinglyLinkedList, k int) *SinglyLinkedListNode {
 	slow := l.head
 	fast := l.head

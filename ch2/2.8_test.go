@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// findLoop determines whether the linked list has a loop. If so, it returns the
+// node at the start of the loop.
 func findLoop(l *SinglyLinkedList) *SinglyLinkedListNode {
 	// Have two pointers: a slow one which iterates over the list, and a
 	// fast one which keeps starting from the beginning and goes to the slow one.

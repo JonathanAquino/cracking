@@ -8,6 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// isPermutation checks if a is a permutation of b.
 func isPermutation(a string, b string) bool {
 	if len(a) != len(b) {
 		return false
