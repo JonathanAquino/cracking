@@ -11,7 +11,7 @@ func isPalindrome(l *SinglyLinkedList) bool {
 	len := l.Length()
 	// Integer division rounds down.
 	for i := 0; i < len/2; i++ {
-		if l.At(i).data != l.At(len-1-i).data {
+		if l.At(i).Data != l.At(len-1-i).Data {
 			return false
 		}
 	}

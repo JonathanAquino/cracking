@@ -10,11 +10,11 @@ import (
 // is represented by (4 -> 2) + (8) = (2 -> 3).
 func sumLists(a *SinglyLinkedList, b *SinglyLinkedList) *SinglyLinkedList {
 	sumList := SinglyLinkedList{}
-	aCurrent := a.head
-	bCurrent := b.head
+	aCurrent := a.Head
+	bCurrent := b.Head
 	carryOne := false
 	for aCurrent != nil {
-		sum := aCurrent.data + bCurrent.data
+		sum := aCurrent.Data + bCurrent.Data
 		if carryOne {
 			sum += 1
 		}
@@ -23,8 +23,8 @@ func sumLists(a *SinglyLinkedList, b *SinglyLinkedList) *SinglyLinkedList {
 			sum -= 10
 		}
 		sumList.Add(sum)
-		aCurrent = aCurrent.next
-		bCurrent = bCurrent.next
+		aCurrent = aCurrent.Next
+		bCurrent = bCurrent.Next
 	}
 	if carryOne {
 		sumList.Add(1)
@@ -41,7 +41,7 @@ func sumListsReverse(a *SinglyLinkedList, b *SinglyLinkedList) *SinglyLinkedList
 // reverseList returns a new linked list with the elements reversed.
 func reverseList(l *SinglyLinkedList) *SinglyLinkedList {
 	result := SinglyLinkedList{}
-	result.head, _ = reverseListByNode(l.head)
+	result.Head, _ = reverseListByNode(l.Head)
 	return &result
 }
 
@@ -50,17 +50,13 @@ func reverseListByNode(node *SinglyLinkedListNode) (*SinglyLinkedListNode, *Sing
 	if node == nil {
 		return nil, nil
 	}
-	curr := SinglyLinkedListNode{data: node.data}
-	head, tail := reverseListByNode(node.next)
+	curr := SinglyLinkedListNode{Data: node.Data}
+	head, tail := reverseListByNode(node.Next)
 	if head == nil {
 		return &curr, &curr
 	}
-	tail.next = &curr
+	tail.Next = &curr
 	return head, &curr
-}
-
-func sumListsReverse(a *SinglyLinkedList, b *SinglyLinkedList) *SinglyLinkedList {
-	return reverseList(sumLists(reverseList(a), reverseList(b)))
 }
 
 func Test2Dot5(t *testing.T) {

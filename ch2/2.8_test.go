@@ -13,14 +13,14 @@ func findLoop(l *SinglyLinkedList) *SinglyLinkedListNode {
 	// fast one which keeps starting from the beginning and goes to the slow one.
 	// We keep track of prevSlow and prevFast which tells us that a loop is detected
 	// when they are different when the fast one meets the slow one.
-	if l.head == nil {
+	if l.Head == nil {
 		return nil
 	}
 	var prevSlow *SinglyLinkedListNode
-	slow := l.head
+	slow := l.Head
 	for slow != nil {
 		var prevFast *SinglyLinkedListNode
-		fast := l.head
+		fast := l.Head
 		for fast != nil {
 			if slow == fast && prevSlow != prevFast {
 				// Loop detected
@@ -31,10 +31,10 @@ func findLoop(l *SinglyLinkedList) *SinglyLinkedListNode {
 				break
 			}
 			prevFast = fast
-			fast = fast.next
+			fast = fast.Next
 		}
 		prevSlow = slow
-		slow = slow.next
+		slow = slow.Next
 	}
 	return nil
 }
@@ -46,8 +46,8 @@ func Test2Dot8a(t *testing.T) {
 	l.Add(3)
 	l.Add(4)
 	l.Add(5)
-	l.Tail().next = l.head.next.next
-	assert.Equal(t, l.head.next.next, findLoop(&l))
+	l.Tail().Next = l.Head.Next.Next
+	assert.Equal(t, l.Head.Next.Next, findLoop(&l))
 }
 
 func Test2Dot8b(t *testing.T) {

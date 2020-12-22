@@ -12,19 +12,19 @@ func partition(l *SinglyLinkedList, threshold int) *SinglyLinkedList {
 	ltList := SinglyLinkedList{}
 	// Greater than or equal list
 	gteList := SinglyLinkedList{}
-	current := l.head
+	current := l.Head
 	for current != nil {
-		if current.data < threshold {
-			ltList.Add(current.data)
+		if current.Data < threshold {
+			ltList.Add(current.Data)
 		} else {
-			gteList.Add(current.data)
+			gteList.Add(current.Data)
 		}
-		current = current.next
+		current = current.Next
 	}
-	if ltList.head == nil {
+	if ltList.Head == nil {
 		return &gteList
 	}
-	ltList.Tail().next = gteList.head
+	ltList.Tail().Next = gteList.Head
 	return &ltList
 }
 

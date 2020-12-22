@@ -8,20 +8,20 @@ import (
 
 // removeDuplicates removes duplicates from an unsorted linked list.
 func removeDuplicates(l *SinglyLinkedList) {
-	slow := l.head
+	slow := l.Head
 	for slow != nil {
 		prevFast := slow
-		fast := slow.next
+		fast := slow.Next
 		for fast != nil {
-			nextFast := fast.next
-			if slow.data == fast.data {
-				prevFast.next = fast.next
-				fast.next = nil
+			nextFast := fast.Next
+			if slow.Data == fast.Data {
+				prevFast.Next = fast.Next
+				fast.Next = nil
 			}
 			prevFast = fast
 			fast = nextFast
 		}
-		slow = slow.next
+		slow = slow.Next
 	}
 }
 

@@ -11,12 +11,12 @@ import (
 func removeNode(node *SinglyLinkedListNode) {
 	current := node
 	for {
-		current.data = current.next.data
-		if current.next.next == nil {
-			current.next = nil
+		current.Data = current.Next.Data
+		if current.Next.Next == nil {
+			current.Next = nil
 			break
 		}
-		current = current.next
+		current = current.Next
 	}
 }
 

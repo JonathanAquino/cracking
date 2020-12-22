@@ -8,20 +8,20 @@ import (
 
 // kthToLast finds the kth to last element of a linked list.
 func kthToLast(l *SinglyLinkedList, k int) *SinglyLinkedListNode {
-	slow := l.head
-	fast := l.head
+	slow := l.Head
+	fast := l.Head
 	for i := 0; i < k-1; i++ {
-		fast = fast.next
+		fast = fast.Next
 		if fast == nil {
 			return nil
 		}
 	}
 	for {
-		fast = fast.next
+		fast = fast.Next
 		if fast == nil {
 			break
 		}
-		slow = slow.next
+		slow = slow.Next
 	}
 	return slow
 }
@@ -37,8 +37,8 @@ func Test2Dot2(t *testing.T) {
 	l.Add(2)
 	l.Add(6)
 	l.Add(5)
-	assert.Equal(t, 5, kthToLast(&l, 1).data)
-	assert.Equal(t, 6, kthToLast(&l, 2).data)
-	assert.Equal(t, 2, kthToLast(&l, 3).data)
+	assert.Equal(t, 5, kthToLast(&l, 1).Data)
+	assert.Equal(t, 6, kthToLast(&l, 2).Data)
+	assert.Equal(t, 2, kthToLast(&l, 3).Data)
 	assert.Nil(t, kthToLast(&l, 100))
 }

@@ -8,16 +8,16 @@ import (
 
 // intersects returns whether any nodes in the two lists have the same reference.
 func intersects(a *SinglyLinkedList, b *SinglyLinkedList) bool {
-	aCurrent := a.head
+	aCurrent := a.Head
 	for aCurrent != nil {
-		bCurrent := b.head
+		bCurrent := b.Head
 		for bCurrent != nil {
 			if aCurrent == bCurrent {
 				return true
 			}
-			bCurrent = bCurrent.next
+			bCurrent = bCurrent.Next
 		}
-		aCurrent = aCurrent.next
+		aCurrent = aCurrent.Next
 	}
 	return false
 }
@@ -42,6 +42,6 @@ func Test2Dot7b(t *testing.T) {
 	b := SinglyLinkedList{}
 	b.Add(7)
 	b.Add(1)
-	b.Tail().next = a.Tail()
+	b.Tail().Next = a.Tail()
 	assert.True(t, intersects(&a, &b))
 }

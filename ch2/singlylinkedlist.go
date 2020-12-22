@@ -1,37 +1,37 @@
 package ch2
 
 type SinglyLinkedList struct {
-	head *SinglyLinkedListNode
+	Head *SinglyLinkedListNode
 }
 
 type SinglyLinkedListNode struct {
-	data int
-	next *SinglyLinkedListNode
+	Data int
+	Next *SinglyLinkedListNode
 }
 
 // Add adds the given value to the linked list.
 func (l *SinglyLinkedList) Add(data int) *SinglyLinkedList {
-	if l.head == nil {
-		l.head = &SinglyLinkedListNode{data: data}
+	if l.Head == nil {
+		l.Head = &SinglyLinkedListNode{Data: data}
 		return l
 	}
-	l.Tail().next = &SinglyLinkedListNode{data: data}
+	l.Tail().Next = &SinglyLinkedListNode{Data: data}
 	return l
 }
 
 // Length returns the length of the list.
 func (l *SinglyLinkedList) Length() int {
-	if l.head == nil {
+	if l.Head == nil {
 		return 0
 	}
 	length := 1
-	current := l.head
+	current := l.Head
 	for {
-		if current.next == nil {
+		if current.Next == nil {
 			return length
 		}
 		length++
-		current = current.next
+		current = current.Next
 	}
 }
 
@@ -39,38 +39,38 @@ func (l *SinglyLinkedList) Length() int {
 func (l *SinglyLinkedList) At(i int) *SinglyLinkedListNode {
 	// TODO: Return an error if i > len - 1.
 	j := 0
-	current := l.head
+	current := l.Head
 	for {
 		if i == j {
 			return current
 		}
 		j++
-		current = current.next
+		current = current.Next
 	}
 }
 
 // Tail returns the last element in the linked list.
 func (l *SinglyLinkedList) Tail() *SinglyLinkedListNode {
-	if l.head == nil {
+	if l.Head == nil {
 		return nil
 	}
-	current := l.head
+	current := l.Head
 	for {
-		if current.next == nil {
+		if current.Next == nil {
 			return current
 		}
-		current = current.next
+		current = current.Next
 	}
 }
 
 // ToArray converts the linked list to an array.
 func ToArray(l SinglyLinkedList) []int {
 	a := []int{}
-	if l.head != nil {
-		current := l.head
+	if l.Head != nil {
+		current := l.Head
 		for current != nil {
-			a = append(a, current.data)
-			current = current.next
+			a = append(a, current.Data)
+			current = current.Next
 		}
 	}
 	return a
