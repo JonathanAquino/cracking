@@ -30,8 +30,7 @@ func buildOrder(projects []string, dependencies []Pair) []string {
 		}
 	}
 	// Radiate outwards using BFS.
-	// Warning: startingPoints may be modified by these operations.
-	queue := startingPoints
+	queue := copySlice(startingPoints)
 	buildOrder := []*Node{}
 	for len(queue) != 0 {
 		if !queue[0].visited {
@@ -46,6 +45,16 @@ func buildOrder(projects []string, dependencies []Pair) []string {
 		result = append(result, node.name)
 	}
 	return result
+}
+
+// copySlice makes a copy of a slice to ensure that the original slice will not
+// be changed by operations on the new slice.
+func copySlice(s []*Node) []*Node {
+	copy := []*Node{}
+	for _, node := range s {
+		copy = append(copy, node)
+	}
+	return copy
 }
 
 type Pair struct {
