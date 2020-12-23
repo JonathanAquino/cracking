@@ -8,6 +8,7 @@ type Graph struct {
 // A Node is a node in a Graph.
 type Node struct {
 	name     string
+	parents  []*Node
 	children []*Node
 	visited  bool
 }
