@@ -25,13 +25,13 @@ type Cell struct {
 // Symbol returns a 1-character string for rendering the cell.
 func (c *Cell) Symbol() string {
 	if c.Flagged {
-		return "F"
+		return "🚩"
 	}
 	if !c.Uncovered {
-		return "?"
+		return "■"
 	}
 	if c.Bomb {
-		return "*"
+		return "💣"
 	}
 	if c.AdjacentBombs > 0 {
 		return strconv.Itoa(c.AdjacentBombs)

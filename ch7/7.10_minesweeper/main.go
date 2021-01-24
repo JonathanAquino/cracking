@@ -2,10 +2,10 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"math/rand"
 	"os"
 	"regexp"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -13,13 +13,14 @@ import (
 // A minesweeper game. Execute "go build" to build the executable.
 
 func main() {
+	seed := time.Now().UTC().UnixNano()
 	println("MINESWEEPER")
-	println("Enter help for help.")
+	println(fmt.Sprintf("Enter help for help. Seed = %d.", seed))
 	println("")
-	rand.Seed(time.Now().UTC().UnixNano())
+	rand.Seed(seed)
 	game := NewGame(8, 3)
-	coordinatePattern := regexp.MustCompile(`^(\d+)\s*,\s*(\d+)$`)
-	flagPattern := regexp.MustCompile(`^f\s*(\d+)\s*,\s*(\d+)$`)
+	coordinatePattern := regexp.MustCompile(`^([A-Z])\s*([a-z])$`)
+	flagPattern := regexp.MustCompile(`^f\s*([A-Z])\s*([a-z])$`)
 	for true {
 		game.Board.Print()
 		println("")
@@ -29,6 +30,7 @@ func main() {
 		}
 		if game.Lost() {
 			println("You lost :-(")
+			println("")
 			game.Board.UncoverAll()
 			game.Board.Print()
 			break
@@ -36,24 +38,24 @@ func main() {
 		print("> ")
 		reader := bufio.NewReader(os.Stdin)
 		text, _ := reader.ReadString('\n')
-		text = strings.ToLower(strings.TrimSpace(text))
+		text = strings.TrimSpace(text)
 		if text == "help" {
-			println("Enter 3,5 to uncover row 3, column 5.")
-			println("Enter F3,5 to flag/unflag row 3, column 5.")
+			println("Enter Ce to uncover row C, column e.")
+			println("Enter fCe to flag/unflag row C, column e.")
 			println("Enter quit to stop.")
 		} else if text == "quit" {
 			println("Goodbye!")
 			break
 		} else if matches := coordinatePattern.FindStringSubmatch(text); matches != nil {
-			row, _ := strconv.Atoi(matches[1])
-			col, _ := strconv.Atoi(matches[2])
+			row := ToRowNumber(matches[1])
+			col := ToColNumber(matches[2])
 			err := game.Board.Uncover(row, col)
 			if err != nil {
 				println(err.Error())
 			}
 		} else if matches := flagPattern.FindStringSubmatch(text); matches != nil {
-			row, _ := strconv.Atoi(matches[1])
-			col, _ := strconv.Atoi(matches[2])
+			row := ToRowNumber(matches[1])
+			col := ToColNumber(matches[2])
 			err := game.Board.Flag(row, col)
 			if err != nil {
 				println(err.Error())

@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+// maxSideLength is the max for sideLength. It is 26 to allow the letters a-z.
+const maxSideLength = 26
+
 // Board is a Minesweeper board
 type Board struct {
 	SideLength int
@@ -10,6 +13,9 @@ type Board struct {
 
 // NewBoard returns an initialized Minesweeper board.
 func NewBoard(sideLength int) *Board {
+	if sideLength > maxSideLength {
+		panic(fmt.Sprintf("sideLength must not exceed %d", maxSideLength))
+	}
 	board := Board{SideLength: sideLength}
 	cells := [][]*Cell{}
 	for i := 0; i < sideLength; i++ {
@@ -27,15 +33,15 @@ func NewBoard(sideLength int) *Board {
 func (b *Board) Print() {
 	edge := " "
 	for i := 0; i < b.SideLength; i++ {
-		edge += "+"
+		edge += ToColLetter(i + 1)
 	}
 	println(edge)
-	for _, row := range *b.Cells {
-		line := "+"
+	for i, row := range *b.Cells {
+		line := ToRowLetter(i + 1)
 		for _, cell := range row {
 			line += cell.Symbol()
 		}
-		line += "+"
+		line += ToRowLetter(i + 1)
 		println(line)
 	}
 	println(edge)
@@ -46,14 +52,34 @@ func (b *Board) OutOfBounds(row, col int) bool {
 	return row < 1 || col < 1 || row > b.SideLength || col > b.SideLength
 }
 
+// ToRowLetter converts 1-26 to A-Z.
+func ToRowLetter(row int) string {
+	return string(int('A') + row - 1)
+}
+
+// ToColLetter converts 1-26 to a-z.
+func ToColLetter(col int) string {
+	return string(int('a') + col - 1)
+}
+
+// ToRowNumber converts A-Z to 1-26.
+func ToRowNumber(row string) int {
+	return int(row[0]) - int('A') + 1
+}
+
+// ToColNumber converts a-z to 1-26.
+func ToColNumber(row string) int {
+	return int(row[0]) - int('a') + 1
+}
+
 // Uncover exposes the given cell.
 func (b *Board) Uncover(row, col int) error {
 	if b.OutOfBounds(row, col) {
-		return fmt.Errorf("%d, %d is out of bounds", row, col)
+		return fmt.Errorf("%s%s is out of bounds", ToRowLetter(row), ToColLetter(col))
 	}
 	cell := b.Cell(row, col)
 	if cell.Flagged {
-		return fmt.Errorf("%d, %d is flagged and can't be uncovered", row, col)
+		return fmt.Errorf("%s%s is flagged and can't be uncovered", ToRowLetter(row), ToColLetter(col))
 	}
 	cell.Uncovered = true
 	if cell.Bomb || cell.IsNumber() {
@@ -83,11 +109,11 @@ func (b *Board) Uncover(row, col int) error {
 // Flag flags the given cell.
 func (b *Board) Flag(row, col int) error {
 	if b.OutOfBounds(row, col) {
-		return fmt.Errorf("%d, %d is out of bounds", row, col)
+		return fmt.Errorf("%s%s is out of bounds", ToRowLetter(row), ToColLetter(col))
 	}
 	cell := b.Cell(row, col)
 	if cell.Uncovered {
-		return fmt.Errorf("%d, %d is already uncovered", row, col)
+		return fmt.Errorf("%s%s is already uncovered", ToRowLetter(row), ToColLetter(col))
 	}
 	cell.Flagged = !cell.Flagged
 	return nil
@@ -137,6 +163,7 @@ func (b *Board) UncoverAll() {
 		for j := 1; j <= b.SideLength; j++ {
 			cell := b.Cell(i, j)
 			cell.Uncovered = true
+			cell.Flagged = false
 		}
 	}
 }
