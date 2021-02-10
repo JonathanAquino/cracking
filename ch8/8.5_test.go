@@ -41,7 +41,7 @@ func multiplyV2(a, b int) int {
 	if lo == 1 {
 		return hi
 	}
-	// Shifting left multiplies by two. We need to find out how far
+	// Shifting hi left multiplies by two. We need to find out how far
 	// we can shift hi left by first finding out how far we can shift lo right.
 	// Once we know that, we can shift hi left by that amount. And then we
 	// can call multiplyV2 again on the remainder.
