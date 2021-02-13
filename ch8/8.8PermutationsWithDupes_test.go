@@ -1,7 +1,6 @@
 package ch8
 
 import (
-	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,18 +9,16 @@ import (
 // permutations returns all permutations of a string of characters (not necessarily
 // unique). Duplicates are not returned. s must be ASCII.
 func permutationsWithDupes(s string) []string {
-	results := permutations(s)
-	sort.Strings(results)
-	if len(results) < 2 {
-		return results
+	permutations := permutations(s)
+	uniquePermutations := map[string]bool{}
+	for _, permutation := range permutations {
+		uniquePermutations[permutation] = true
 	}
-	uniqueResults := []string{results[0]}
-	for i := 1; i < len(results); i++ {
-		if results[i] != results[i-1] {
-			uniqueResults = append(uniqueResults, results[i])
-		}
+	permutations = []string{}
+	for permutation := range uniquePermutations {
+		permutations = append(permutations, permutation)
 	}
-	return uniqueResults
+	return permutations
 }
 
 func TestPermutationsWithDupes(t *testing.T) {
